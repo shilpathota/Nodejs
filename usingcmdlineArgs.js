@@ -35,10 +35,24 @@ yargs.version('1.1.0')
 yargs.command({
     command: 'add',
     describe: 'Adds the new node',
-    handler: function() {
-        console.log('Adding new node')
+    builder: {
+        title:{
+            describe: 'Note title',
+            demandOption: true, // to make field mandatory
+            type: 'string'//by default type is bool
+        },
+        body:{
+        describe: 'Note describe',
+        demandOption:true,
+            type: 'string'
+    }
+    },
+    handler: function(argv) {
+        console.log('title:'+argv.title)
+        console.log('body:'+argv.body)
     }
 })
+//to execute :: node app.js add --title="Buy" --body="We buy these products"
 
 //Create remove command
 yargs.command({
@@ -57,3 +71,4 @@ yargs.command({
         console.log('listing out nodes')
     }
 })
+yargs.parse() //to display th arguments
